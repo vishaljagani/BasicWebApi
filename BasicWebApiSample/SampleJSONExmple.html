@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+</head>
+<body>
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
+    <script>
+        $(function () {
+            $("#someTable td.age").filter(function () {
+                return parseInt($(this).text(), 10) > 50;
+            }).addClass('highlite');
+        });
+
+        $(function () {
+            $("#someTable td.age").filter(function () {
+                return parseInt($(this).text(), 10) < 50;
+            }).parent().addClass('highlite');
+        });     
+
+        //Count Number of Rows in a Table
+        $(function () {
+            $("#someTable").after(function () {
+                console.log($('tr', this).length + " rows.");
+            });
+        });
+
+        //Add a New Row Below the Selected Row by Clicking on It
+        //$(function () {
+        //    $("#someTable tbody").on("click", "tr", function (e) {
+        //        if (e.target.type != "text") {
+        //            var row = $("<tr><td><input /></td><td><input /></td><td>-" +
+        //                        "</td><td><input /></td><td><input /></td></tr>");
+        //            $(this).after(row);
+        //        }
+        //    });
+        //});
+        //
+
+        //Click on a Row and Retrieve Values of all Cells in that Row
+        $("#someTable tbody").on("click", "tr", function () {
+            var rowinfo = $(this).closest('tr').find('td').map(function () {
+                return $(this).text();
+            }).get().join();
+            console.log(rowinfo);
+        });
+    </script>
+    <style>
+    .highlite{
+    font-weight: bold;
+    color: #0a9600 !important;
+    }
+    </style>
+    <table id="someTable">
+    <thead>
+    <tr>
+    <th class="empid">EmpId</th>
+    <th class="fname">First Name</th>
+    <th class="lname">Last Name</th>
+    <th class="email">Email</th>
+    <th class="age">Age</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td class="empid">E342</td>
+    <td class="fname">Bill</td>
+    <td class="lname">Evans</td>
+    <td class="email">Bill@devcurry.com</td>
+    <td class="age">35</td>
+    </tr>
+        <tr>
+            <td class="empid">E341</td>
+            <td class="fname">Will</td>
+            <td class="lname">Vans</td>
+            <td class="email">Will@devcurry.com</td>
+            <td class="age">51</td>
+        </tr>
+    </tbody>
+    </table>
+</body>
+</html>
